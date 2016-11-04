@@ -5,12 +5,12 @@ const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-module.exports = ({ isProd = false, isWebpackDevServer = false, port } = {}) => ({
+module.exports = ({ isProd = false, isWebpackDevServer = false } = {}) => ({
   devtool: 'source-map',
   entry: {
     [`app${isProd ? '.min' : ''}`]: (
-      isWebpackDevServer ? [`webpack-dev-server/client?http://localhost:${port}`, 'webpack/hot/dev-server'] : []
-    ).concat(path.join(__dirname, 'src', 'index.js'))
+      isWebpackDevServer ? ['webpack-hot-middleware/client'] : []
+    ).concat(path.join(__dirname, 'app', 'index.js'))
   },
   output: {
     path: path.join(__dirname, 'dist'),
@@ -29,7 +29,7 @@ module.exports = ({ isProd = false, isWebpackDevServer = false, port } = {}) => 
     }),
     new HtmlWebpackPlugin({
       minify: {},
-      template: path.join(__dirname, 'src', 'index.html'),
+      template: path.join(__dirname, 'app', 'index.html'),
       inject: 'head'
     }),
     new webpack.ProvidePlugin({

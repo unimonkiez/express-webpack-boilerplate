@@ -1,8 +1,10 @@
 {
-  "name": "webpack-boilerplate",
+  "name": "express-webpack-boilerplate",
   "version": "0.0.1",
-  "description": "webpack-boilerplate",
+  "description": "express-webpack-boilerplate",
+  "main": "index.js",
   "scripts": {
+    "postinstall": "npm run build:prod",
     "lint": "eslint --ext .js,.jsx .",
     "test": "npm run lint",
     "build": "node ./build.js",
@@ -10,12 +12,13 @@
     "build:prod": "npm run build -- -p",
     "build:prod:watch": "npm run build:prod -- -w",
     "build:watch:prod": "npm run build:prod:watch",
-    "start": "node ./start.js"
+    "start": "npm run start:prod -- -w",
+    "start:prod": "node ./index.js"
   },
   "author": "unimonkiez",
   "repository": {
     "type": "git",
-    "url": "git@github.com:unimonkiez/webpack-boilerplate.git"
+    "url": "git@github.com:unimonkiez/express-webpack-boilerplate.git"
   },
   "keywords": [
     "npm",
@@ -23,9 +26,9 @@
   ],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/unimonkiez/webpack-boilerplate/issues"
+    "url": "https://github.com/unimonkiez/express-webpack-boilerplate/issues"
   },
-  "homepage": "https://github.com/unimonkiez/webpack-boilerplate",
+  "homepage": "https://github.com/unimonkiez/express-webpack-boilerplate",
   "devDependencies": {
     "babel-core": "^6.17.0",
     "babel-eslint": "^7.0.0",
@@ -38,6 +41,7 @@
     "css-loader": "^0.25.0",
     "eslint": "^3.3.1",
     "eslint-config-airbnb": "^12.0.0",
+    "eslint-import-resolver-webpack": "git://github.com/unimonkiez/eslint-plugin-import.git",
     "eslint-plugin-import": "^1.16.0",
     "eslint-plugin-jsx-a11y": "^2.2.3",
     "eslint-plugin-react": "^6.4.1",
@@ -56,7 +60,11 @@
     "style-loader": "^0.13.1",
     "url-loader": "^0.5.7",
     "webpack": "^1.13.2",
-    "webpack-dev-server": "^1.16.2",
+    "webpack-dev-middleware": "^1.8.4",
+    "webpack-hot-middleware": "^2.13.0",
     "whatwg-fetch": "^1.0.0"
+  },
+  "dependencies": {
+    "express": "^4.14.0"
   }
 }
