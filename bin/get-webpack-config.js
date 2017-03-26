@@ -36,12 +36,11 @@ module.exports = ({ isProd = false, isWebpackDevServer = false } = {}) => ({
     new HtmlWebpackPlugin({
       minify: {},
       template: path.join(rootPath, 'app', 'index.html'),
-      inject: 'head'
+      inject: 'body'
     })
   ]
   .concat(isWebpackDevServer ? [
-    new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoErrorsPlugin()
+    new webpack.HotModuleReplacementPlugin()
   ] : [])
   .concat(isProd ? [
     new webpack.optimize.UglifyJsPlugin({
@@ -63,16 +62,25 @@ module.exports = ({ isProd = false, isWebpackDevServer = false } = {}) => ({
             }
           }
         ]
-      },
-      {
-        test: /\.jsx$/,
+      }, {
+        test: /\.html$/,
+        issuer: /\.js$/,
         exclude: /node_modules/,
         use: [
           {
-            loader: 'babel-loader',
+            loader: 'file-loader',
             options: {
-              presets: ['es2015', 'stage-2', 'react'].concat(isWebpackDevServer ? ['react-hmre'] : [])
+              name: './template/[hash].[ext]'
             }
+          }
+        ]
+      }, {
+        test: /\.html$/,
+        issuer: /\.html$/,
+        exclude: /node_modules/,
+        use: [
+          {
+            loader: 'to-string-loader'
           }
         ]
       }, {
