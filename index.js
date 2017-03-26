@@ -25,7 +25,7 @@ if (useWebpack) {
   const webpack = require('webpack');
   const webpackMiddleware = require('webpack-dev-middleware');
   const webpackHotMiddleware = require('webpack-hot-middleware');
-  const getWebpackConfig = require('./get-webpack-config.js');
+  const getWebpackConfig = require('./bin/get-webpack-config.js');
   /* eslint-enable global-require */
 
   const webpackConfig = getWebpackConfig({ isWebpackDevServer: true });
